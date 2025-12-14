@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neon Glide: Motion Racer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Import Map for Modules -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://esm.sh/three@0.160.0",
+                "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/",
+                "cannon-es": "https://esm.sh/cannon-es@0.20.0",
+                "@mediapipe/pose": "https://esm.sh/@mediapipe/pose@0.5.1675469404",
+                "@mediapipe/hands": "https://esm.sh/@mediapipe/hands@0.4.1675469240",
+                "@mediapipe/camera_utils": "https://esm.sh/@mediapipe/camera_utils@0.3.1675466862",
+                "@mediapipe/drawing_utils": "https://esm.sh/@mediapipe/drawing_utils@0.3.1675466124"
+            }
+        }
+    </script>
+    <!-- MediaPipe Global Fallbacks (safest for cross-origin WASM loading) -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Canvas for Three.js -->
+        <canvas id="gl-canvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div id="ui-layer">
+            <div id="hud-top">
+                <div class="hud-panel speed-panel">
+                    <span class="label">SPEED</span>
+                    <span id="speed-val">0</span> <span class="unit">km/h</span>
+                </div>
+                <div class="hud-panel score-panel">
+                    <span class="label">SCORE</span>
+                    <span id="score-val">0</span>
+                    <div id="multiplier-box">x<span id="multiplier-val">1.0</span></div>
+                </div>
+                <div class="hud-panel rank-panel">
+                    <span class="label">RANK</span>
+                    <span id="rank-val">1</span>/<span id="total-players">1</span>
+                </div>
+            </div>
+
+            <div id="gesture-feedback"></div>
+
+            <div id="calibration-overlay" class="active">
+                <h2>System Calibration</h2>
+                <div class="cam-container">
+                    <video id="input-video" class="input_video" playsinline style="display:none"></video>
+                    <canvas id="calibration-canvas"></canvas>
+                    <div class="guide-box" id="guide-box"></div>
+                </div>
+                <p id="calibration-status">Stand back until your full body is visible.</p>
+                <div class="metrics">
+                    <div>Lean: <span id="debug-lean">0</span>°</div>
+                    <div>Y-Pos: <span id="debug-y">0.0</span></div>
+                    <div>FPS: <span id="debug-fps">0</span></div>
+                </div>
+                <button id="start-btn" disabled>Calibrate & Start Race</button>
+                <p class="hint">Or press 'Space' to skip camera and use WASD/Arrows</p>
+            </div>
+            
+            <div id="pip-cam">
+                <canvas id="pip-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="src/main.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
