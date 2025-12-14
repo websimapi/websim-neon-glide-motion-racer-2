@@ -35,7 +35,7 @@ export class TrackingSystem {
     async init() {
         // Initialize MediaPipe Pose
         this.pose = new window.Pose({locateFile: (file) => {
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/${file}`;
         }});
 
         this.pose.setOptions({
@@ -50,7 +50,7 @@ export class TrackingSystem {
 
         // Initialize MediaPipe Hands
         this.hands = new window.Hands({locateFile: (file) => {
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`;
         }});
 
         this.hands.setOptions({
